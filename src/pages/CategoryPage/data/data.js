@@ -8,38 +8,45 @@ import selang from '../../../assets/selang_category_bg.png'
 export const data = {
     rumahIbu: {
         image: rumahIbu,
-        title: "Rumah Ibu",
-        qr: "QR Code Rumah Ibu"
+        title: "Rumah Ibu (The Main House)",
+        qr: "QR",
+        qrPoint: "QR POINT 1"
     },
     balai: {
         image: balai,
         title: "Balai",
-        qr: "QR Code Balai"
-    },
-    climate: {
-        image: climate,
-        title: "climate",
-        qr: "QR Code climate"
-    },
-    dapur: {
-        image: dapur,
-        title: "Dapur",
-        qr: "QR Code Dapur"
-    },
-    ikat: {
-        image: ikat,
-        title: "Ikat",
-        qr: "QR Code Ikat"
-    },
-    ornament: {
-        image: ornament,
-        title: "Ornament",
-        qr: "QR Code ornament"
+        qr: "QR",
+        qrPoint: "QR POINT 2"
     },
     selang: {
         image: selang,
         title: "Selang",
-        qr: "QR Code Selang"
+        qr: "QR",
+        qrPoint: "QR POINT 3"
+    },
+    dapur: {
+        image: dapur,
+        title: "Rumah Dapur (The Kitchen)",
+        qr: "QR",
+        qrPoint: "QR POINT 4"
+    },
+    ikat: {
+        image: ikat,
+        title: "Ikat Mechanism",
+        qr: "QR",
+        qrPoint: "QR POINT 5"
+    },
+    climate: {
+        image: climate,
+        title: "Traditional Climate Design",
+        qr: "QR",
+        qrPoint: "QR POINT 6"
+    },
+    ornament: {
+        image: ornament,
+        title: "Iconography & Ornamentation",
+        qr: "QR",
+        qrPoint: "QR POINT 7"
     },
 };
 export default data

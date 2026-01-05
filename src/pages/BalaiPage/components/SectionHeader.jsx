@@ -1,9 +1,9 @@
 
 import React from 'react';
 
-const SectionHeader = ({ icon, title }) => {
+const SectionHeader = ({ icon, title, textColor = 'text-gray-500' }) => {
     return (
-        <div className="flex gap-3 text-gray-500">
+        <div className={`flex gap-3 ${textColor}`}>
       <span className="opacity-80">
         {icon}
       </span>

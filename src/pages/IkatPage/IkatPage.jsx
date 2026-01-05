@@ -1,95 +1,364 @@
-import React, {useState} from 'react';
-import { Building2, Key, Info, Send } from 'lucide-react';
+import React, {useState, useEffect, useRef} from 'react';
+import { Building2, Key, ArrowRight } from 'lucide-react';
 import SectionHeader from './components/SectionHeader';
 import ChatboxButton from "../../components/ChatboxButton.jsx";
 import Background from '../../assets/rumah_ibu_background.png'
 import ChatBox from "../../components/Chatbox.jsx";
+import Header from "../../components/Header.jsx";
+import { useNavigate } from 'react-router-dom';
 import Ikat from './assets/ikat_mechanism.png'
+
 const IkatPage = () => {
+    const navigate = useNavigate();
     const [isChatClose, setIsChatClose] = useState(true);
-    const horizontalMask = 'linear-gradient(to right, transparent 0%, black 25%, black 50%, transparent 100%)';
-    const verticalMask = 'linear-gradient(to bottom, transparent 0%, black 25%, black 50%, transparent 100%)';
+    const [scrollProgress, setScrollProgress] = useState(0);
+    const [buttonTransform, setButtonTransform] = useState({ x: 0, y: 0 });
+    const [isHovered, setIsHovered] = useState(false);
+    const buttonRef = useRef(null);
+    const heroImageRef = useRef(null);
+
+    // Scroll-triggered background transition
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollTop = window.scrollY;
+            const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = Math.min(scrollTop / (documentHeight * 0.5), 1);
+            setScrollProgress(progress);
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // Magnetic button effect
+    useEffect(() => {
+        const button = buttonRef.current;
+        if (!button) return;
+
+        const handleMouseMove = (e) => {
+            const rect = button.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            const distance = Math.sqrt(
+                Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2)
+            );
+
+            if (distance < 60) {
+                const x = (e.clientX - centerX) * 0.4;
+                const y = (e.clientY - centerY) * 0.4;
+                setButtonTransform({ 
+                    x: Math.max(-20, Math.min(20, x)), 
+                    y: Math.max(-20, Math.min(20, y)) 
+                });
+            }
+        };
+
+        const handleMouseLeave = () => {
+            setButtonTransform({ x: 0, y: 0 });
+            setIsHovered(false);
+        };
+
+        const handleMouseEnter = () => {
+            setIsHovered(true);
+        };
+
+        button.addEventListener('mousemove', handleMouseMove);
+        button.addEventListener('mouseleave', handleMouseLeave);
+        button.addEventListener('mouseenter', handleMouseEnter);
+
+        return () => {
+            button.removeEventListener('mousemove', handleMouseMove);
+            button.removeEventListener('mouseleave', handleMouseLeave);
+            button.removeEventListener('mouseenter', handleMouseEnter);
+        };
+    }, []);
+
+    // Interpolate background color from Light Stone to Deep Matte Black
+    const getBackgroundStyle = () => {
+        if (scrollProgress === 0) {
+            return {
+                backgroundColor: '#E8E8E8', // Light Stone
+                backgroundAttachment: 'fixed',
+            };
+        }
+        
+        const r1 = 232; // #E8E8E8 (Light Stone)
+        const g1 = 232;
+        const b1 = 232;
+        
+        const r2 = 18; // #121212 (Deep Matte Black)
+        const g2 = 18;
+        const b2 = 18;
+        
+        const r = Math.round(r1 + (r2 - r1) * scrollProgress);
+        const g = Math.round(g1 + (g2 - g1) * scrollProgress);
+        const b = Math.round(b1 + (b2 - b1) * scrollProgress);
+        
+        return {
+            backgroundColor: `rgb(${r}, ${g}, ${b})`,
+            backgroundAttachment: 'fixed',
+        };
+    };
+
+    // Dynamic text color based on scroll
+    const getTextColor = () => {
+        if (scrollProgress < 0.3) {
+            return 'text-gray-900';
+        }
+        return 'text-white';
+    };
 
     const chatButtonClickHandler = (e) => {
         e.preventDefault()
         setIsChatClose(!isChatClose);
     }
 
+    const handleExploreDirectory = () => {
+        navigate('/category');
+    };
+
     return (
-        <div className="w-[80%] h-screen m-auto mt-0 flex flex-col items-center pb-12 relative overflow-hidden"
-             style={{backgroundColor:'#F2F2F2'}}>
-            <div className="absolute inset-0 top-[-5%] opacity-50">
-                <img
-                    src={Background}
-                    alt="Background"
-                    className='w-[75%] m-auto'
+        <div 
+            className="min-h-screen flex flex-col relative transition-colors duration-300 w-full"
+            style={getBackgroundStyle()}
+        >
+            {/* Film Grain Overlay - Very Subtle */}
+            <div 
+                className="fixed inset-0 pointer-events-none z-0"
+                style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                    opacity: 0.02,
+                    mixBlendMode: 'overlay',
+                }}
+            />
+
+            {/* Hero Section - Cinematic Full-Bleed Centered Hero */}
+            <section 
+                className="relative flex items-center justify-center overflow-hidden"
+                style={{ 
+                    width: '100vw',
+                    height: '100vh',
+                    margin: 0,
+                    padding: 0,
+                }}
+            >
+                {/* Full-Bleed Background Image - Edge to Edge */}
+                <div 
+                    className="absolute inset-0 z-0"
                     style={{
-                        WebkitMaskImage: `${horizontalMask}, ${verticalMask}`,
-                        maskImage: `${horizontalMask}, ${verticalMask}`,
-                        WebkitMaskComposite: 'source-in',
-                        maskComposite: 'intersect',
+                        width: '100vw',
+                        height: '100vh',
+                        margin: 0,
+                        padding: 0,
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
                     }}
-                />
-            </div>
-            <main className="px-6 pt-12 z-3" style={{maskImage: 'li'}}>
-                {/* Main Title Section */}
-                <header className="mb-8">
-                    <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
-                        Balai
+                >
+                    <img
+                        ref={heroImageRef}
+                        src={Background}
+                        alt="Ikat Mechanism Background"
+                        className="w-full h-full"
+                        style={{
+                            width: '100vw',
+                            height: '100vh',
+                            objectFit: 'cover',
+                            objectPosition: 'center',
+                            margin: 0,
+                            padding: 0,
+                            display: 'block',
+                        }}
+                    />
+                    {/* Atmospheric darkening overlay - 50% opacity for cinematic mood */}
+                    <div className="absolute inset-0 bg-black/50"></div>
+                </div>
+
+                {/* Transparent Header/Navbar - Absolute at Top */}
+                <div className="absolute top-0 left-0 right-0 z-50" style={{ width: '100vw' }}>
+                    <Header isTransparent={true} />
+                </div>
+
+                {/* Centered Page Title - Perfect Horizontal and Vertical Center */}
+                <div 
+                    className="relative z-30 text-center max-w-5xl px-6"
+                    style={{
+                        zIndex: 30,
+                    }}
+                >
+                    <h1 
+                        className="text-7xl md:text-8xl lg:text-9xl font-bold leading-[0.95] text-white drop-shadow-lg"
+                        style={{ 
+                            fontFamily: 'Playfair Display, Cormorant Garamond, serif',
+                            fontWeight: 700,
+                            letterSpacing: '0.02em',
+                            textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
+                        }}
+                    >
+                        Ikat Mechanism
                     </h1>
+                </div>
 
-                    <SectionHeader icon={<Building2 size={24} />} title="Architectural Profile" />
-
-                    <div className="relative pl-4 mt-4 border-l-2 border-orange-200">
-                        <p className="text-gray-800 text-2xl font-bold leading-relaxed italic font-sans">
-
-                            “ The house exemplifies the Tanggan (Mortise) and Pasak (Tenon) system, a method of joinery
-                            that uses no metal nails. “
+                {/* Organized Floating Info Box - Bottom-Right Corner */}
+                <div 
+                    className="absolute z-30 max-w-md"
+                    style={{
+                        bottom: '10%',
+                        right: '5%',
+                        zIndex: 30,
+                    }}
+                >
+                    <div 
+                        className="rounded-2xl p-8 backdrop-blur-md border"
+                        style={{
+                            background: 'rgba(255, 255, 255, 0.1)',
+                            backdropFilter: 'blur(12px)',
+                            WebkitBackdropFilter: 'blur(12px)',
+                            borderColor: 'rgba(255, 255, 255, 0.2)',
+                            borderWidth: '1px',
+                            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
+                        }}
+                    >
+                        <p className="text-base leading-relaxed text-white/90" style={{fontFamily: 'Inter, sans-serif'}}>
+                            The house exemplifies the Tanggan (Mortise) and Pasak (Tenon) system, a method of joinery that uses no metal nails.
                         </p>
                     </div>
-                </header>
+                </div>
 
-                {/* Structural Elements Section */}
-                <SectionHeader icon={<Key size={24} />} title="Key Structural Elements" />
-                <section className="mt-4 mb-10 h-[60vh] flex flex-col h-1/2">
-                    <div className="space-y-4 h-full">
-                        <div className="bg-gray-300 rounded shadow-inner flex h-1/2 rounded-2xl shadow-2xl">
-                            <img src={Ikat} className='h-full'/>
-                            <div className='m-2'>
-                                <p className='text-2xl font-bold'>The Mechanism</p>
-                                <p className='text-xl leading-9'>A hole (mortise) is chiseled into a column,
-                                    and a shaped tongue (tenon) at the end of a beam is inserted into it. A wooden peg
-                                    (pasak) is then driven through the joint to lock it.
-                                </p>
+                {/* Central Action Anchor - Bottom-Center (Vertical Symmetry with Title) */}
+                <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-30">
+                    <button
+                        ref={buttonRef}
+                        onClick={handleExploreDirectory}
+                        className={`relative px-20 py-6 rounded-full cursor-pointer overflow-hidden group transition-all duration-300 ${
+                            isHovered ? 'scale-105' : 'scale-100'
+                        }`}
+                        style={{
+                            transform: `translate(${buttonTransform.x}px, ${buttonTransform.y}px) scale(${isHovered ? 1.05 : 1})`,
+                            transition: 'transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                            willChange: 'transform',
+                            background: '#F9F7F2', // Radiant Cream
+                            boxShadow: isHovered 
+                                ? '0 0 40px rgba(249, 247, 242, 0.9), 0 0 80px rgba(249, 247, 242, 0.6)' 
+                                : '0 0 30px rgba(249, 247, 242, 0.7)',
+                            zIndex: 100,
+                        }}
+                    >
+                        <div className="flex items-center justify-center gap-3 relative z-10">
+                            <span className="font-sans font-bold text-lg md:text-xl uppercase tracking-[0.1em] text-[#2D2926]" style={{fontFamily: 'Inter, sans-serif'}}>
+                                EXPLORE EXHIBIT DIRECTORY
+                            </span>
+                            <ArrowRight size={22} className="text-[#2D2926]" />
+                        </div>
+                        
+                        {/* Radial fill on hover */}
+                        <span 
+                            className="absolute inset-0 rounded-full bg-[#2D2926] opacity-0 group-hover:opacity-10 transition-opacity duration-500"
+                            style={{
+                                maskImage: 'radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 70%)',
+                                WebkitMaskImage: 'radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 70%)',
+                                maskSize: '200% 200%',
+                                WebkitMaskSize: '200% 200%',
+                            }}
+                        />
+                    </button>
+                </div>
+            </section>
+
+            {/* Content Container - Max Width 1200px */}
+            <div className="w-full max-w-[1200px] mx-auto flex-1 flex flex-col relative z-10 px-6 md:px-8 lg:px-12 pt-16">
+                <main className="w-full flex-1 relative">
+                    {/* Architectural Profile Section - gap-16 spacing */}
+                    <header className="mb-16 w-full">
+                        <SectionHeader icon={<Building2 size={24} />} title="Architectural Profile" textColor={getTextColor()} />
+
+                        <div className="relative pl-6 mt-8 border-l-2 border-orange-300/50 max-w-4xl">
+                            <p className={`text-xl md:text-2xl font-light leading-relaxed italic ${getTextColor()}`} style={{fontFamily: 'Playfair Display, Cormorant Garamond, serif'}}>
+                                " The house exemplifies the Tanggan (Mortise) and Pasak (Tenon) system, a method of joinery that uses no metal nails. "
+                            </p>
+                        </div>
+                    </header>
+
+                    {/* Key Structural Elements - Single Column Layout (Ikat has 3 items) */}
+                    <SectionHeader icon={<Key size={24} />} title="Key Structural Elements" textColor={getTextColor()} />
+                    <section className="mt-16 mb-16 w-full">
+                        <div className="space-y-12 max-w-4xl">
+                            {/* The Mechanism */}
+                            <div className="flex flex-col">
+                                {/* Museum Frame - Light Gray/Charcoal Border */}
+                                <div 
+                                    className="bg-white border-2 border-gray-300 rounded-lg p-8 mb-6 shadow-lg"
+                                    style={{
+                                        padding: '32px',
+                                    }}
+                                >
+                                    <div className="relative overflow-hidden rounded-sm mx-auto" style={{ maxWidth: '500px' }}>
+                                        <img 
+                                            src={Ikat} 
+                                            className='w-full h-auto object-cover' 
+                                            alt="The Mechanism"
+                                            style={{
+                                                display: 'block',
+                                                maxWidth: '500px',
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                                
+                                {/* Integrated Caption Below Image */}
+                                <div>
+                                    <h3 className={`text-2xl font-bold mb-3 ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif', fontWeight: 600}}>
+                                        The Mechanism
+                                    </h3>
+                                    <p className={`text-base leading-relaxed ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif'}}>
+                                        A hole (mortise) is chiseled into a column, and a shaped tongue (tenon) at the end of a beam is inserted into it. A wooden peg (pasak) is then driven through the joint to lock it.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Structural Ductility */}
+                            <div className="flex flex-col">
+                                <div>
+                                    <h3 className={`text-2xl font-bold mb-3 ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif', fontWeight: 600}}>
+                                        Structural Ductility
+                                    </h3>
+                                    <p className={`text-base leading-relaxed ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif'}}>
+                                        This system is superior to rigid nailing in a tropical climate. Timber expands and contracts with humidity. A nailed joint would eventually crack or loosen as the wood moves. A pegged joint allows for "micro-movements." The structure is flexible, allowing it to absorb wind loads or minor ground tremors without catastrophic failure.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Portability */}
+                            <div className="flex flex-col">
+                                <div>
+                                    <h3 className={`text-2xl font-bold mb-3 ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif', fontWeight: 600}}>
+                                        Portability
+                                    </h3>
+                                    <p className={`text-base leading-relaxed ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif'}}>
+                                        This system is the enabler of the house's relocation. Because the joints are mechanical interlocks rather than permanent fusions, the house could be dismantled (knocked down) and reassembled (knocked together) without destroying the primary components.
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                        <div className="bg-gray-300 rounded shadow-inner flex h-1/2 rounded-2xl shadow-2xl">
-                            <div className='m-2'>
-                                <p className='text-2xl font-bold'>Structural Ductility</p>
-                                <p className='text-xl leading-9'>This system is superior to rigid nailing in a tropical climate.
-                                    Timber expands and contracts with humidity. A nailed joint would eventually crack or loosen as the wood moves.
-                                    A pegged joint allows for "micro-movements." The structure is flexible, allowing it to absorb wind loads or minor ground tremors without catastrophic failure.
-                                </p>
-                            </div>
-                        </div>
-                        <div className="bg-gray-300 rounded shadow-inner flex h-1/2 rounded-2xl shadow-2xl">
-                            <div className='m-2'>
-                                <p className='text-2xl font-bold'>Portability</p>
-                                <p className='text-xl leading-9'>This system is the enabler of the house's relocation. Because the joints are mechanical interlocks rather than permanent fusions, the house could be dismantled (knocked down) and reassembled (knocked together) without destroying the primary components.
-                                </p>
-                            </div>
-                        </div>
+                    </section>
+                </main>
+            </div>
+
+            {/* Floating Chatbox - Bottom Right */}
+            <section className='fixed bottom-6 right-6 z-50'>
+                <div onClick={chatButtonClickHandler}>
+                    {isChatClose && <ChatboxButton />}
+                </div>
+                {!isChatClose && (
+                    <div className="absolute bottom-16 right-0">
+                        <ChatBox chatOnClickHandler={chatButtonClickHandler}/>
                     </div>
-                </section>
-                <section className='absolute bottom-3 right-3 w-full flex justify-end z-50'>
-                    <div onClick={chatButtonClickHandler} className='w-[5%]'>
-                        {isChatClose && <ChatboxButton />}
-                    </div>
-                    <div className='fixed bottom-0 '>
-                        {!isChatClose && <ChatBox chatOnClickHandler={chatButtonClickHandler}/>}
-                    </div>
-                </section>
-            </main>
+                )}
+            </section>
         </div>
     );
 };

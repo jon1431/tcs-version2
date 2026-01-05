@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+/* Global body and html background - Matte Black for seamless transitions */
+html, body {
+  background-color: #121212;
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}

@@ -9,10 +9,12 @@ const sessionId = nanoid();
 const ChatBox = ({chatOnClickHandler}) => {
     const BASE_URL = "https://tcs-560362072194.europe-west1.run.app/"
     const [inputValue, setInputValue] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const [messageHistory, setMessageHistory] = useState([{sender: 'bot', text:
             'Hi! How can I assist you today?'}]);
     sessionStorage.setItem("username", sessionId)
     const fetchChatResponse = async(message) => {
+        setIsLoading(true)
         const userId = sessionStorage.getItem('username')
         console.log(`userId: ${userId}`);
         const response = await axios(
@@ -24,6 +26,7 @@ const ChatBox = ({chatOnClickHandler}) => {
                 }
             },
         )
+        setIsLoading(false)
         return response.data
     }
 
@@ -54,6 +57,11 @@ const ChatBox = ({chatOnClickHandler}) => {
             style={{scrollbarWidth:'none'}}>
                 {/* Placeholder for actual chat bubbles */}
                 <ChatboxItem messages={messageHistory}/> {/* Pass array of objects */}
+                {isLoading && (
+                    <div className="text-sm text-gray-500 italic mb-2">
+                        Bot is typing...
+                    </div>
+                )}
             </div>
 
             {/* Input Section - Compact */}

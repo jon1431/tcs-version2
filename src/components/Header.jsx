@@ -49,6 +49,16 @@ const Header = ({ isTransparent = false }) => {
                 >
                     Contact
                 </a>
+                <a
+                    href="https://me-qr.com/dash-board"
+                    className={`text-[10px] sm:text-xs font-bold uppercase tracking-widest transition-colors ${
+                        isTransparent
+                            ? 'text-white/90'
+                            : 'text-gray-800 opacity-[0.59]'
+                    } hover:text-blue-400`}
+                >
+                    Admin
+                </a>
             </nav>
         </header>
     );

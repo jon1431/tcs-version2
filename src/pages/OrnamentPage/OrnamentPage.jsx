@@ -204,7 +204,45 @@ const OrnamentPage = () => {
                         <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-normal">Ornamentation</span>
                     </h1>
                 </div>
+                {/*explore directory button*/}
+                {/* Central Action Anchor - Bottom-Center (Vertical Symmetry with Title) */}
+                <div className="absolute bottom-40 left-1/2 transform -translate-x-1/2 z-30 w-[50%] px-4 sm:px-0 z-50">
+                    <button
+                        ref={buttonRef}
+                        onClick={handleExploreDirectory}
+                        className={`relative w-full sm:w-auto px-6 sm:px-12 md:px-16 lg:px-20 py-4 sm:py-5 md:py-6 rounded-full cursor-pointer overflow-hidden group transition-all duration-300 ${
+                            isHovered ? 'scale-105' : 'scale-100'
+                        }`}
+                        style={{
+                            transform: `translate(${buttonTransform.x}px, ${buttonTransform.y}px) scale(${isHovered ? 1.05 : 1})`,
+                            transition: 'transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                            willChange: 'transform',
+                            background: '#F9F7F2', // Radiant Cream
+                            boxShadow: isHovered
+                                ? '0 0 40px rgba(249, 247, 242, 0.9), 0 0 80px rgba(249, 247, 242, 0.6)'
+                                : '0 0 30px rgba(249, 247, 242, 0.7)',
+                            zIndex: 100,
+                        }}
+                    >
+                        <div className="flex items-center justify-center gap-2 sm:gap-3 relative z-10">
+                            <span className="font-sans font-bold text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl uppercase tracking-[0.1em] text-[#2D2926]" style={{fontFamily: 'Inter, sans-serif'}}>
+                                EXPLORE EXHIBIT DIRECTORY
+                            </span>
+                            <ArrowRight size={18} className="text-[#2D2926] sm:w-5 sm:h-5 md:w-6 md:h-6" />
+                        </div>
 
+                        {/* Radial fill on hover */}
+                        <span
+                            className="absolute inset-0 rounded-full bg-[#2D2926] opacity-0 group-hover:opacity-10 transition-opacity duration-500"
+                            style={{
+                                maskImage: 'radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 70%)',
+                                WebkitMaskImage: 'radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 70%)',
+                                maskSize: '200% 200%',
+                                WebkitMaskSize: '200% 200%',
+                            }}
+                        />
+                    </button>
+                </div>
                 {/* Organized Floating Info Box - Bottom-Right Corner (Architectural Profile) */}
                 <div 
                     className="absolute z-30 max-w-xs sm:max-w-sm md:max-w-md hidden sm:block"
@@ -230,45 +268,6 @@ const OrnamentPage = () => {
                         </p>
                     </div>
                 </div>
-
-                {/* Central Action Anchor - Bottom-Center (Vertical Symmetry with Title) */}
-                <div className="absolute bottom-8 sm:bottom-12 md:bottom-16 left-1/2 transform -translate-x-1/2 z-30 w-full px-4 sm:px-0">
-                    <button
-                        ref={buttonRef}
-                        onClick={handleExploreDirectory}
-                        className={`relative w-full sm:w-auto px-6 sm:px-12 md:px-16 lg:px-20 py-4 sm:py-5 md:py-6 rounded-full cursor-pointer overflow-hidden group transition-all duration-300 ${
-                            isHovered ? 'scale-105' : 'scale-100'
-                        }`}
-                        style={{
-                            transform: `translate(${buttonTransform.x}px, ${buttonTransform.y}px) scale(${isHovered ? 1.05 : 1})`,
-                            transition: 'transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                            willChange: 'transform',
-                            background: '#F9F7F2', // Radiant Cream
-                            boxShadow: isHovered 
-                                ? '0 0 40px rgba(249, 247, 242, 0.9), 0 0 80px rgba(249, 247, 242, 0.6)' 
-                                : '0 0 30px rgba(249, 247, 242, 0.7)',
-                            zIndex: 100,
-                        }}
-                    >
-                        <div className="flex items-center justify-center gap-2 sm:gap-3 relative z-10">
-                            <span className="font-sans font-bold text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl uppercase tracking-[0.1em] text-[#2D2926]" style={{fontFamily: 'Inter, sans-serif'}}>
-                                EXPLORE EXHIBIT DIRECTORY
-                            </span>
-                            <ArrowRight size={18} className="text-[#2D2926] sm:w-5 sm:h-5 md:w-6 md:h-6" />
-                        </div>
-                        
-                        {/* Radial fill on hover */}
-                        <span 
-                            className="absolute inset-0 rounded-full bg-[#2D2926] opacity-0 group-hover:opacity-10 transition-opacity duration-500"
-                            style={{
-                                maskImage: 'radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 70%)',
-                                WebkitMaskImage: 'radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 70%)',
-                                maskSize: '200% 200%',
-                                WebkitMaskSize: '200% 200%',
-                            }}
-                        />
-                    </button>
-                </div>
             </section>
 
             {/* Content Container - Max Width 1200px */}
@@ -288,7 +287,7 @@ const OrnamentPage = () => {
                                     }}
                                 >
                                     <div 
-                                        className="relative overflow-hidden rounded-sm mx-auto" 
+                                        className="relative overflow-hidden rounded-sm mx-auto bg-white p-8"
                                         style={{ 
                                             maxWidth: '500px',
                                             width: '100%',

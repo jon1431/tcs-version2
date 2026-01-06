@@ -30,22 +30,22 @@ const Header = ({ isTransparent = false }) => {
 
             <nav className="flex gap-3 sm:gap-4 md:gap-6">
                 <a 
-                    href="#" 
+                    href="https://badanwarisanmalaysia.org/about-us-2/our-work/"
                     className={`text-[10px] sm:text-xs font-bold uppercase tracking-widest transition-colors ${
                         isTransparent 
-                            ? 'text-white/90 hover:text-white' 
-                            : 'text-gray-800 hover:text-black opacity-[0.59]'
-                    }`}
+                            ? 'text-white/90' 
+                            : 'text-gray-800 opacity-[0.59]'
+                    } hover:text-blue-400`}
                 >
                     About
                 </a>
                 <a 
-                    href="#" 
+                    href="https://badanwarisanmalaysia.org/contact-us-2/"
                     className={`text-[10px] sm:text-xs font-bold uppercase tracking-widest transition-colors ${
                         isTransparent 
-                            ? 'text-white/90 hover:text-white' 
-                            : 'text-gray-800 hover:text-black opacity-[0.59]'
-                    }`}
+                            ? 'text-white/90' 
+                            : 'text-gray-800 opacity-[0.59]'
+                    } hover:text-blue-400`}
                 >
                     Contact
                 </a>

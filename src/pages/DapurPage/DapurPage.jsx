@@ -186,13 +186,13 @@ const DapurPage = () => {
 
                 {/* Centered Page Title - Perfect Horizontal and Vertical Center */}
                 <div 
-                    className="relative z-30 text-center max-w-5xl px-6"
+                    className="relative z-30 text-center max-w-5xl px-4 sm:px-6"
                     style={{
                         zIndex: 30,
                     }}
                 >
                     <h1 
-                        className="text-7xl md:text-8xl lg:text-9xl font-bold leading-[0.95] text-white drop-shadow-lg"
+                        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold leading-[0.95] text-white drop-shadow-lg"
                         style={{ 
                             fontFamily: 'Playfair Display, Cormorant Garamond, serif',
                             fontWeight: 700,
@@ -201,7 +201,7 @@ const DapurPage = () => {
                         }}
                     >
                         Rumah Dapur<br />
-                        <span className="text-5xl md:text-6xl lg:text-7xl font-normal opacity-90" style={{ letterSpacing: '0.01em' }}>
+                        <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-normal opacity-90" style={{ letterSpacing: '0.01em' }}>
                             (Kitchen)
                         </span>
                     </h1>
@@ -209,7 +209,7 @@ const DapurPage = () => {
 
                 {/* Organized Floating Info Box - Bottom-Right Corner */}
                 <div 
-                    className="absolute z-30 max-w-md"
+                    className="absolute z-30 max-w-xs sm:max-w-sm md:max-w-md hidden sm:block"
                     style={{
                         bottom: '10%',
                         right: '5%',
@@ -217,7 +217,7 @@ const DapurPage = () => {
                     }}
                 >
                     <div 
-                        className="rounded-2xl p-8 backdrop-blur-md border"
+                        className="rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 backdrop-blur-md border"
                         style={{
                             background: 'rgba(255, 255, 255, 0.1)',
                             backdropFilter: 'blur(12px)',
@@ -227,18 +227,18 @@ const DapurPage = () => {
                             boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
                         }}
                     >
-                        <p className="text-base leading-relaxed text-white/90" style={{fontFamily: 'Inter, sans-serif'}}>
+                        <p className="text-sm sm:text-base leading-relaxed text-white/90" style={{fontFamily: 'Inter, sans-serif'}}>
                             The dapur (kitchen) is located at the back and lowest part of the house. Its walls have openings and carved panels that allow smoke and heat from cooking to escape easily.
                         </p>
                     </div>
                 </div>
 
                 {/* Central Action Anchor - Bottom-Center (Vertical Symmetry with Title) */}
-                <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-30">
+                <div className="absolute bottom-8 sm:bottom-12 md:bottom-16 left-1/2 transform -translate-x-1/2 z-30 w-full px-4 sm:px-0">
                     <button
                         ref={buttonRef}
                         onClick={handleExploreDirectory}
-                        className={`relative px-20 py-6 rounded-full cursor-pointer overflow-hidden group transition-all duration-300 ${
+                        className={`relative w-full sm:w-auto px-6 sm:px-12 md:px-16 lg:px-20 py-4 sm:py-5 md:py-6 rounded-full cursor-pointer overflow-hidden group transition-all duration-300 ${
                             isHovered ? 'scale-105' : 'scale-100'
                         }`}
                         style={{
@@ -252,11 +252,11 @@ const DapurPage = () => {
                             zIndex: 100,
                         }}
                     >
-                        <div className="flex items-center justify-center gap-3 relative z-10">
-                            <span className="font-sans font-bold text-lg md:text-xl uppercase tracking-[0.1em] text-[#2D2926]" style={{fontFamily: 'Inter, sans-serif'}}>
+                        <div className="flex items-center justify-center gap-2 sm:gap-3 relative z-10">
+                            <span className="font-sans font-bold text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl uppercase tracking-[0.1em] text-[#2D2926]" style={{fontFamily: 'Inter, sans-serif'}}>
                                 EXPLORE EXHIBIT DIRECTORY
                             </span>
-                            <ArrowRight size={22} className="text-[#2D2926]" />
+                            <ArrowRight size={18} className="text-[#2D2926] sm:w-5 sm:h-5 md:w-6 md:h-6" />
                         </div>
                         
                         {/* Radial fill on hover */}
@@ -274,14 +274,14 @@ const DapurPage = () => {
             </section>
 
             {/* Content Container - Max Width 1200px */}
-            <div className="w-full max-w-[1200px] mx-auto flex-1 flex flex-col relative z-10 px-6 md:px-8 lg:px-12 pt-16">
+            <div className="w-full max-w-[1200px] mx-auto flex-1 flex flex-col relative z-10 px-4 sm:px-6 md:px-8 lg:px-12 pt-8 sm:pt-12 md:pt-16">
                 <main className="w-full flex-1 relative">
                     {/* Architectural Profile Section - gap-16 spacing */}
-                    <header className="mb-16 w-full">
+                    <header className="mb-8 sm:mb-12 md:mb-16 w-full">
                         <SectionHeader icon={<Building2 size={24} />} title="Architectural Profile" textColor={getTextColor()} />
 
-                        <div className="relative pl-6 mt-8 border-l-2 border-orange-300/50 max-w-4xl">
-                            <p className={`text-xl md:text-2xl font-light leading-relaxed italic ${getTextColor()}`} style={{fontFamily: 'Playfair Display, Cormorant Garamond, serif'}}>
+                        <div className="relative pl-4 sm:pl-6 mt-6 sm:mt-8 border-l-2 border-orange-300/50 max-w-4xl">
+                            <p className={`text-base sm:text-lg md:text-xl lg:text-2xl font-light leading-relaxed italic ${getTextColor()}`} style={{fontFamily: 'Playfair Display, Cormorant Garamond, serif'}}>
                                 " The dapur (kitchen) is located at the back and lowest part of the house. Its walls have openings and carved panels that allow smoke and heat from cooking to escape easily. The kitchen often includes a pelantar, an open wooden platform used for washing and other wet activities, where water drains directly to the ground. "
                             </p>
                         </div>
@@ -289,13 +289,13 @@ const DapurPage = () => {
 
                     {/* Key Structural Elements - 2-Column Grid with Museum Frames */}
                     <SectionHeader icon={<Key size={24} />} title="Key Structural Elements" textColor={getTextColor()} />
-                    <section className="mt-16 mb-16 w-full">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+                    <section className="mt-8 sm:mt-12 md:mt-16 mb-8 sm:mb-12 md:mb-16 w-full">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16">
                             {/* Pelantar - Left Column */}
                             <div className="flex flex-col">
                                 {/* Museum Frame - Light Gray/Charcoal Border */}
                                 <div 
-                                    className="bg-white border-2 border-gray-300 rounded-lg p-8 mb-6 shadow-lg"
+                                    className="bg-white border-2 border-gray-300 rounded-lg p-4 sm:p-6 md:p-8 mb-4 sm:mb-6 shadow-lg"
                                     style={{
                                         padding: '32px',
                                     }}
@@ -315,10 +315,10 @@ const DapurPage = () => {
                                 
                                 {/* Integrated Caption Below Image */}
                                 <div>
-                                    <h3 className={`text-2xl font-bold mb-3 ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif', fontWeight: 600}}>
+                                    <h3 className={`text-xl sm:text-2xl font-bold mb-2 sm:mb-3 ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif', fontWeight: 600}}>
                                         Pelantar
                                     </h3>
-                                    <p className={`text-base leading-relaxed ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif'}}>
+                                    <p className={`text-sm sm:text-base leading-relaxed ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif'}}>
                                         The pelantar is an open wooden platform used for washing and other wet activities. Water drains through the gaps in the floor directly to the ground below.
                                     </p>
                                 </div>
@@ -328,7 +328,7 @@ const DapurPage = () => {
                             <div className="flex flex-col">
                                 {/* Museum Frame - Light Gray/Charcoal Border */}
                                 <div 
-                                    className="bg-white border-2 border-gray-300 rounded-lg p-8 mb-6 shadow-lg"
+                                    className="bg-white border-2 border-gray-300 rounded-lg p-4 sm:p-6 md:p-8 mb-4 sm:mb-6 shadow-lg"
                                     style={{
                                         padding: '32px',
                                     }}
@@ -348,10 +348,10 @@ const DapurPage = () => {
                                 
                                 {/* Integrated Caption Below Image */}
                                 <div>
-                                    <h3 className={`text-2xl font-bold mb-3 ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif', fontWeight: 600}}>
+                                    <h3 className={`text-xl sm:text-2xl font-bold mb-2 sm:mb-3 ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif', fontWeight: 600}}>
                                         Smoke Extraction
                                     </h3>
-                                    <p className={`text-base leading-relaxed ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif'}}>
+                                    <p className={`text-sm sm:text-base leading-relaxed ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif'}}>
                                         Traditional wood-fired cooking produces a lot of heat and smoke, so the kitchen is designed with open walls and carved panels for ventilation. Open gable ends help hot air and smoke escape quickly.
                                     </p>
                                 </div>
@@ -362,14 +362,12 @@ const DapurPage = () => {
             </div>
 
             {/* Floating Chatbox - Bottom Right */}
-            <section className='fixed bottom-6 right-6 z-50'>
+            <section className='fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50'>
                 <div onClick={chatButtonClickHandler}>
                     {isChatClose && <ChatboxButton />}
                 </div>
                 {!isChatClose && (
-                    <div className="absolute bottom-16 right-0">
-                        <ChatBox chatOnClickHandler={chatButtonClickHandler}/>
-                    </div>
+                    <ChatBox chatOnClickHandler={chatButtonClickHandler}/>
                 )}
             </section>
         </div>

@@ -185,13 +185,13 @@ const IkatPage = () => {
 
                 {/* Centered Page Title - Perfect Horizontal and Vertical Center */}
                 <div 
-                    className="relative z-30 text-center max-w-5xl px-6"
+                    className="relative z-30 text-center max-w-5xl px-4 sm:px-6"
                     style={{
                         zIndex: 30,
                     }}
                 >
                     <h1 
-                        className="text-7xl md:text-8xl lg:text-9xl font-bold leading-[0.95] text-white drop-shadow-lg"
+                        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold leading-[0.95] text-white drop-shadow-lg"
                         style={{ 
                             fontFamily: 'Playfair Display, Cormorant Garamond, serif',
                             fontWeight: 700,
@@ -205,7 +205,7 @@ const IkatPage = () => {
 
                 {/* Organized Floating Info Box - Bottom-Right Corner */}
                 <div 
-                    className="absolute z-30 max-w-md"
+                    className="absolute z-30 max-w-xs sm:max-w-sm md:max-w-md hidden sm:block"
                     style={{
                         bottom: '10%',
                         right: '5%',
@@ -213,7 +213,7 @@ const IkatPage = () => {
                     }}
                 >
                     <div 
-                        className="rounded-2xl p-8 backdrop-blur-md border"
+                        className="rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 backdrop-blur-md border"
                         style={{
                             background: 'rgba(255, 255, 255, 0.1)',
                             backdropFilter: 'blur(12px)',
@@ -223,18 +223,18 @@ const IkatPage = () => {
                             boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
                         }}
                     >
-                        <p className="text-base leading-relaxed text-white/90" style={{fontFamily: 'Inter, sans-serif'}}>
+                        <p className="text-sm sm:text-base leading-relaxed text-white/90" style={{fontFamily: 'Inter, sans-serif'}}>
                             The house exemplifies the Tanggan (Mortise) and Pasak (Tenon) system, a method of joinery that uses no metal nails.
                         </p>
                     </div>
                 </div>
 
                 {/* Central Action Anchor - Bottom-Center (Vertical Symmetry with Title) */}
-                <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-30">
+                <div className="absolute bottom-8 sm:bottom-12 md:bottom-16 left-1/2 transform -translate-x-1/2 z-30 w-full px-4 sm:px-0">
                     <button
                         ref={buttonRef}
                         onClick={handleExploreDirectory}
-                        className={`relative px-20 py-6 rounded-full cursor-pointer overflow-hidden group transition-all duration-300 ${
+                        className={`relative w-full sm:w-auto px-6 sm:px-12 md:px-16 lg:px-20 py-4 sm:py-5 md:py-6 rounded-full cursor-pointer overflow-hidden group transition-all duration-300 ${
                             isHovered ? 'scale-105' : 'scale-100'
                         }`}
                         style={{
@@ -248,11 +248,11 @@ const IkatPage = () => {
                             zIndex: 100,
                         }}
                     >
-                        <div className="flex items-center justify-center gap-3 relative z-10">
-                            <span className="font-sans font-bold text-lg md:text-xl uppercase tracking-[0.1em] text-[#2D2926]" style={{fontFamily: 'Inter, sans-serif'}}>
+                        <div className="flex items-center justify-center gap-2 sm:gap-3 relative z-10">
+                            <span className="font-sans font-bold text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl uppercase tracking-[0.1em] text-[#2D2926]" style={{fontFamily: 'Inter, sans-serif'}}>
                                 EXPLORE EXHIBIT DIRECTORY
                             </span>
-                            <ArrowRight size={22} className="text-[#2D2926]" />
+                            <ArrowRight size={18} className="text-[#2D2926] sm:w-5 sm:h-5 md:w-6 md:h-6" />
                         </div>
                         
                         {/* Radial fill on hover */}
@@ -270,7 +270,7 @@ const IkatPage = () => {
             </section>
 
             {/* Content Container - Max Width 1200px */}
-            <div className="w-full max-w-[1200px] mx-auto flex-1 flex flex-col relative z-10 px-6 md:px-8 lg:px-12 pt-16">
+            <div className="w-full max-w-[1200px] mx-auto flex-1 flex flex-col relative z-10 px-4 sm:px-6 md:px-8 lg:px-12 pt-8 sm:pt-12 md:pt-16">
                 <main className="w-full flex-1 relative">
                     {/* Architectural Profile Section - gap-16 spacing */}
                     <header className="mb-16 w-full">
@@ -291,7 +291,7 @@ const IkatPage = () => {
                             <div className="flex flex-col">
                                 {/* Museum Frame - Light Gray/Charcoal Border */}
                                 <div 
-                                    className="bg-white border-2 border-gray-300 rounded-lg p-8 mb-6 shadow-lg"
+                                    className="bg-white border-2 border-gray-300 rounded-lg p-4 sm:p-6 md:p-8 mb-4 sm:mb-6 shadow-lg"
                                     style={{
                                         padding: '32px',
                                     }}
@@ -311,10 +311,10 @@ const IkatPage = () => {
                                 
                                 {/* Integrated Caption Below Image */}
                                 <div>
-                                    <h3 className={`text-2xl font-bold mb-3 ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif', fontWeight: 600}}>
+                                    <h3 className={`text-xl sm:text-2xl font-bold mb-2 sm:mb-3 ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif', fontWeight: 600}}>
                                         The Mechanism
                                     </h3>
-                                    <p className={`text-base leading-relaxed ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif'}}>
+                                    <p className={`text-sm sm:text-base leading-relaxed ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif'}}>
                                         A hole (mortise) is chiseled into a column, and a shaped tongue (tenon) at the end of a beam is inserted into it. A wooden peg (pasak) is then driven through the joint to lock it.
                                     </p>
                                 </div>
@@ -323,10 +323,10 @@ const IkatPage = () => {
                             {/* Structural Ductility */}
                             <div className="flex flex-col">
                                 <div>
-                                    <h3 className={`text-2xl font-bold mb-3 ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif', fontWeight: 600}}>
+                                    <h3 className={`text-xl sm:text-2xl font-bold mb-2 sm:mb-3 ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif', fontWeight: 600}}>
                                         Structural Ductility
                                     </h3>
-                                    <p className={`text-base leading-relaxed ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif'}}>
+                                    <p className={`text-sm sm:text-base leading-relaxed ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif'}}>
                                         This system is superior to rigid nailing in a tropical climate. Timber expands and contracts with humidity. A nailed joint would eventually crack or loosen as the wood moves. A pegged joint allows for "micro-movements." The structure is flexible, allowing it to absorb wind loads or minor ground tremors without catastrophic failure.
                                     </p>
                                 </div>
@@ -335,10 +335,10 @@ const IkatPage = () => {
                             {/* Portability */}
                             <div className="flex flex-col">
                                 <div>
-                                    <h3 className={`text-2xl font-bold mb-3 ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif', fontWeight: 600}}>
+                                    <h3 className={`text-xl sm:text-2xl font-bold mb-2 sm:mb-3 ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif', fontWeight: 600}}>
                                         Portability
                                     </h3>
-                                    <p className={`text-base leading-relaxed ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif'}}>
+                                    <p className={`text-sm sm:text-base leading-relaxed ${getTextColor()}`} style={{fontFamily: 'Inter, sans-serif'}}>
                                         This system is the enabler of the house's relocation. Because the joints are mechanical interlocks rather than permanent fusions, the house could be dismantled (knocked down) and reassembled (knocked together) without destroying the primary components.
                                     </p>
                                 </div>
@@ -349,14 +349,12 @@ const IkatPage = () => {
             </div>
 
             {/* Floating Chatbox - Bottom Right */}
-            <section className='fixed bottom-6 right-6 z-50'>
+            <section className='fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50'>
                 <div onClick={chatButtonClickHandler}>
                     {isChatClose && <ChatboxButton />}
                 </div>
                 {!isChatClose && (
-                    <div className="absolute bottom-16 right-0">
-                        <ChatBox chatOnClickHandler={chatButtonClickHandler}/>
-                    </div>
+                    <ChatBox chatOnClickHandler={chatButtonClickHandler}/>
                 )}
             </section>
         </div>

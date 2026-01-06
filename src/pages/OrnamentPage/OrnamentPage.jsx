@@ -290,9 +290,8 @@ const OrnamentPage = () => {
                             <div className="flex flex-col">
                                 {/* Museum Frame - White Frame with Kerawang Image */}
                                 <div 
-                                    className="bg-white border-2 border-gray-300 rounded-lg mb-6 shadow-lg"
+                                    className="rounded-lg mb-6 shadow-lg"
                                     style={{
-                                        padding: '32px',
                                         boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15), inset 0 2px 8px rgba(0, 0, 0, 0.05)',
                                     }}
                                 >

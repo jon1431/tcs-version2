@@ -230,7 +230,7 @@ const IkatPage = () => {
                 </div>
 
                 {/* Central Action Anchor - Bottom-Center (Vertical Symmetry with Title) */}
-                <div className="absolute bottom-8 sm:bottom-12 md:bottom-16 left-1/2 transform -translate-x-1/2 z-30 w-full px-4 sm:px-0">
+                <div className="absolute bottom-40 left-1/2 transform -translate-x-1/2 z-30 w-[50%] px-4 sm:px-0 z-50">
                     <button
                         ref={buttonRef}
                         onClick={handleExploreDirectory}
@@ -242,8 +242,8 @@ const IkatPage = () => {
                             transition: 'transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
                             willChange: 'transform',
                             background: '#F9F7F2', // Radiant Cream
-                            boxShadow: isHovered 
-                                ? '0 0 40px rgba(249, 247, 242, 0.9), 0 0 80px rgba(249, 247, 242, 0.6)' 
+                            boxShadow: isHovered
+                                ? '0 0 40px rgba(249, 247, 242, 0.9), 0 0 80px rgba(249, 247, 242, 0.6)'
                                 : '0 0 30px rgba(249, 247, 242, 0.7)',
                             zIndex: 100,
                         }}
@@ -254,9 +254,9 @@ const IkatPage = () => {
                             </span>
                             <ArrowRight size={18} className="text-[#2D2926] sm:w-5 sm:h-5 md:w-6 md:h-6" />
                         </div>
-                        
+
                         {/* Radial fill on hover */}
-                        <span 
+                        <span
                             className="absolute inset-0 rounded-full bg-[#2D2926] opacity-0 group-hover:opacity-10 transition-opacity duration-500"
                             style={{
                                 maskImage: 'radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 70%)',

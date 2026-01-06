@@ -145,26 +145,25 @@ const ChatBox = ({chatOnClickHandler}) => {
                         </div>
                     )}
                 </div>
-
-                {/* Input Section - Compact */}
-                <div className="flex items-center gap-2">
-                    <div className="relative flex-1">
-                        <input
-                            type="text"
-                            value={inputValue}
-                            onChange={(e) => setInputValue(e.target.value)}
-                            placeholder="Ask Questions.."
-                            className="w-full bg-gray-100 border-none rounded-full py-2.5 px-4 text-sm text-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-orange-200 transition-all outline-none"
-                        />
-                    </div>
-                    <button
-                        className="p-2.5 bg-white shadow-md rounded-full text-gray-500 hover:text-orange-500 hover:scale-105 active:scale-95 transition-all"
-                        aria-label="Send message"
-                        onClick={sendOnClickHandler}
-                    >
-                        <Send size={20} className="transform rotate-[-10deg]" />
-                    </button>
+            </div>
+            {/* Input Section - Compact */}
+            <div className="flex items-center gap-2 m-8">
+                <div className="relative flex-1">
+                    <input
+                        type="text"
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                        placeholder="Ask Questions.."
+                        className="w-full bg-gray-100 border-none rounded-full py-2.5 px-4 text-sm text-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-orange-200 transition-all outline-none"
+                    />
                 </div>
+                <button
+                    className="p-2.5 bg-white shadow-md rounded-full text-gray-500 hover:text-orange-500 hover:scale-105 active:scale-95 transition-all"
+                    aria-label="Send message"
+                    onClick={sendOnClickHandler}
+                >
+                    <Send size={20} className="transform rotate-[-10deg]" />
+                </button>
             </div>
         </div>
     );

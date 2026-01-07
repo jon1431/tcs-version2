@@ -1,8 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import BWM_Logo from "../assets/rumah_penghulu_ic.png"
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ isTransparent = false }) => {
+    const navigate = useNavigate();
+    const challengesOnClickHandler = (e) => {
+        e.preventDefault()
+        navigate('/quiz')
+    }
     return (
         <header 
             className={`flex justify-between items-center py-4 sm:py-6 md:py-8 px-4 sm:px-6 w-full ${isTransparent ? 'bg-transparent' : ''}`}
@@ -27,8 +33,17 @@ const Header = ({ isTransparent = false }) => {
                     />
                 </Link>
             </div>
-
             <nav className="flex gap-3 sm:gap-4 md:gap-6">
+                <div
+                    onClick={challengesOnClickHandler}
+                    className={`text-[10px] sm:text-xs font-bold uppercase tracking-widest transition-colors ${
+                        isTransparent
+                            ? 'text-white/90'
+                            : 'text-gray-800 opacity-[0.59]'
+                    } hover:text-blue-400`}
+                >
+                    Challenges
+                </div>
                 <a 
                     href="https://badanwarisanmalaysia.org/about-us-2/our-work/"
                     className={`text-[10px] sm:text-xs font-bold uppercase tracking-widest transition-colors ${

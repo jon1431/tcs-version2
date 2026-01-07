@@ -8,6 +8,7 @@ import IkatPage from "./pages/IkatPage/IkatPage.jsx";
 import OrnamentPage from "./pages/OrnamentPage/OrnamentPage.jsx";
 import SelangPage from "./pages/SelangPage/SelangPage.jsx";
 import ClimatePage from "./pages/ClimatePage/ClimatePage.jsx";
+import QuizPage from "./pages/QuizPage/QuizPage.jsx";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/selang' element={<SelangPage/>} />
           <Route path='/category' element={<CategoryPage/>} />
           <Route path='climate' element={<ClimatePage/>}/>
+          <Route path='/quiz' element={<QuizPage/>}/>
       </Routes>
   )
 }

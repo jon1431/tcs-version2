@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send } from 'lucide-react';
+import { Send, Brain } from 'lucide-react';
 import ChatboxItem from "./ChatboxItem.jsx";
 import axios from "axios";
 import { nanoid } from 'nanoid';
@@ -8,6 +8,7 @@ const sessionId = nanoid();
 
 const ChatBox = ({chatOnClickHandler}) => {
     const BASE_URL = "https://tcs-560362072194.europe-west1.run.app/"
+    // const BASE_URL = "http://localhost:8080/"
     const [inputValue, setInputValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [messageHistory, setMessageHistory] = useState([{sender: 'bot', text:
@@ -94,6 +95,7 @@ const ChatBox = ({chatOnClickHandler}) => {
             },
         )
         setIsLoading(false)
+        console.log(response.data)
         return response.data
     }
 

@@ -3,7 +3,7 @@ import Footer from "../../components/Footer.jsx";
 import CategoryItem from "./components/CategoryItem.jsx";
 import {data} from "./data/data.js";
 import {useNavigate} from "react-router-dom";
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, Trophy, BookOpen } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 
 const CategoryPage = () => {
@@ -118,6 +118,146 @@ const CategoryPage = () => {
             button.removeEventListener('mouseleave', handleMouseLeave);
         };
     }, []);
+
+    // Quiz Challenge Card Component
+    const QuizChallengeCard = ({ onClick, align }) => {
+        const cardRef = useRef(null);
+        const [isVisible, setIsVisible] = useState(false);
+        const [tilt, setTilt] = useState({ x: 0, y: 0 });
+        const [isHovered, setIsHovered] = useState(false);
+
+        useEffect(() => {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            setIsVisible(true);
+                        }
+                    });
+                },
+                { threshold: 0.1 }
+            );
+
+            if (cardRef.current) {
+                observer.observe(cardRef.current);
+            }
+
+            return () => {
+                if (cardRef.current) {
+                    observer.unobserve(cardRef.current);
+                }
+            };
+        }, []);
+
+        useEffect(() => {
+            const card = cardRef.current;
+            if (!card) return;
+
+            const handleMouseMove = (e) => {
+                const rect = card.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                
+                const x = (e.clientX - centerX) / (rect.width / 2);
+                const y = (e.clientY - centerY) / (rect.height / 2);
+                
+                setTilt({ x: y * 5, y: -x * 5 });
+            };
+
+            const handleMouseLeave = () => {
+                setTilt({ x: 0, y: 0 });
+                setIsHovered(false);
+            };
+
+            const handleMouseEnter = () => {
+                setIsHovered(true);
+            };
+
+            card.addEventListener('mousemove', handleMouseMove);
+            card.addEventListener('mouseleave', handleMouseLeave);
+            card.addEventListener('mouseenter', handleMouseEnter);
+
+            return () => {
+                card.removeEventListener('mousemove', handleMouseMove);
+                card.removeEventListener('mouseleave', handleMouseLeave);
+                card.removeEventListener('mouseenter', handleMouseEnter);
+            };
+        }, []);
+
+        const alignmentClass = align === 'left' ? 'mr-auto ml-0' : 'ml-auto mr-0';
+
+        return (
+            <div 
+                ref={cardRef}
+                onClick={onClick}
+                className={`relative group w-full max-w-[85%] ${alignmentClass} h-64 md:h-80 lg:h-96 overflow-hidden rounded-[24px] shadow-2xl cursor-pointer transition-all duration-500 mb-16 ${
+                    isVisible 
+                        ? 'opacity-100 translate-y-0' 
+                        : 'opacity-0 translate-y-[30px]'
+                }`}
+                style={{
+                    transition: 'opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)',
+                    perspective: '1000px',
+                    transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+                    transformStyle: 'preserve-3d',
+                    willChange: 'transform',
+                    background: 'linear-gradient(135deg, #92400e 0%, #78350f 50%, #451a03 100%)',
+                }}
+            >
+                {/* Animated Background Pattern */}
+                <div className="absolute inset-0 opacity-20">
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-amber-400 rounded-full blur-3xl -mr-48 -mt-48 animate-pulse"></div>
+                    <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-600 rounded-full blur-3xl -ml-48 -mb-48 animate-pulse" style={{ animationDelay: '1s' }}></div>
+                </div>
+                
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent"></div>
+
+                {/* Trophy Icon Background */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+                    <Trophy className="w-48 md:w-64 lg:w-80 h-48 md:h-64 lg:h-80 text-amber-400/10" />
+                </div>
+
+                {/* Text Content */}
+                <div className={`relative h-full flex flex-col justify-center z-10 ${
+                    align === 'left' ? 'px-8 md:px-12' : 'px-8 md:px-12 items-end text-right'
+                }`}>
+                    <div className="flex items-center gap-3 mb-4">
+                        <Trophy className="w-8 h-8 md:w-10 md:h-10 text-amber-400" />
+                        <h2 
+                            className="text-3xl md:text-4xl lg:text-5xl font-serif text-white leading-tight" 
+                            style={{ fontFamily: 'Playfair Display, Cormorant Garamond, serif' }}
+                        >
+                            Heritage Challenge
+                        </h2>
+                    </div>
+                    <p className="text-white/90 text-base md:text-lg max-w-md mt-2" style={{fontFamily: 'Inter, sans-serif'}}>
+                        Test your knowledge about Rumah Penghulu Abu Seman
+                    </p>
+                </div>
+
+                {/* Glassmorphic Footer */}
+                <div 
+                    className="absolute bottom-0 left-0 right-0 h-10 px-6 backdrop-blur-[20px] border-t border-white/10 z-20 rounded-b-[24px] flex items-center"
+                    style={{
+                        background: 'rgba(255, 255, 255, 0.05)',
+                        backdropFilter: 'blur(20px) saturate(150%)',
+                        WebkitBackdropFilter: 'blur(20px) saturate(150%)',
+                    }}
+                >
+                    <div className={`flex items-center justify-between w-full ${align === 'right' ? 'flex-row-reverse' : ''}`}>
+                        <span className="text-white/90 text-xs font-semibold tracking-[0.25em] uppercase leading-none flex items-center gap-2" style={{fontFamily: 'Inter, sans-serif'}}>
+                            <BookOpen className="w-4 h-4" />
+                            Take Quiz
+                        </span>
+                        <div className="p-1.5 rounded-full bg-amber-400/20 backdrop-blur-md border border-amber-400/30 text-amber-300 text-xs font-bold min-w-[32px] h-6 flex items-center justify-center leading-none">
+                            Q
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    };
 
     return (
         <div 
@@ -234,6 +374,12 @@ const CategoryPage = () => {
                         title={data['ornament']['title']}
                         onClick={() => navigate('/ornament')}
                         align="left"
+                    />
+                    
+                    {/* Quiz Challenge Card */}
+                    <QuizChallengeCard 
+                        onClick={() => navigate('/quiz')}
+                        align="right"
                     />
                 </div>
             </main>

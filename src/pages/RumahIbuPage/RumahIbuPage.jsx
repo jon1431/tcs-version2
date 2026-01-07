@@ -184,11 +184,11 @@ const RumahIbuPage = () => {
                     <Header isTransparent={true} />
                 </div>
 
-                {/* Centered Page Title - Perfect Horizontal and Vertical Center */}
+                {/* Centered Page Title - Positioned Higher to Avoid Overlap */}
                 <div 
-                    className="relative z-30 text-center max-w-5xl px-4 sm:px-6"
+                    className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 text-center max-w-5xl px-4 sm:px-6"
                     style={{
-                        zIndex: 30,
+                        zIndex: 40,
                     }}
                 >
                     <h1 
@@ -209,9 +209,9 @@ const RumahIbuPage = () => {
 
                 {/* Organized Floating Info Box - Bottom-Right Corner */}
                 <div 
-                    className="absolute z-30 max-w-xs sm:max-w-sm md:max-w-md hidden sm:block"
+                    className="absolute max-w-xs sm:max-w-sm md:max-w-md hidden sm:block"
                     style={{
-                        bottom: '10%',
+                        bottom: '12%',
                         right: '5%',
                         zIndex: 30,
                     }}
@@ -233,8 +233,8 @@ const RumahIbuPage = () => {
                     </div>
                 </div>
 
-                {/* Central Action Anchor - Bottom-Center (Vertical Symmetry with Title) */}
-                <div className="absolute bottom-40 left-1/2 transform -translate-x-1/2 z-30 w-[50%] px-4 sm:px-0 z-50">
+                {/* Central Action Anchor - Bottom-Center (Lower Position to Avoid Title) */}
+                <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2 z-30 w-[50%] px-4 sm:px-0" style={{ zIndex: 30 }}>
                     <button
                         ref={buttonRef}
                         onClick={handleExploreDirectory}
@@ -249,7 +249,7 @@ const RumahIbuPage = () => {
                             boxShadow: isHovered
                                 ? '0 0 40px rgba(249, 247, 242, 0.9), 0 0 80px rgba(249, 247, 242, 0.6)'
                                 : '0 0 30px rgba(249, 247, 242, 0.7)',
-                            zIndex: 100,
+                            zIndex: 30,
                         }}
                     >
                         <div className="flex items-center justify-center gap-2 sm:gap-3 relative z-10">

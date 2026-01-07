@@ -12,6 +12,8 @@ const ChatBox = ({chatOnClickHandler}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [messageHistory, setMessageHistory] = useState([{sender: 'bot', text:
             'Hi! How can I assist you today?'}]);
+    const [isDisable, setIsDisable] = useState(false);
+
     sessionStorage.setItem("username", sessionId)
     
     // Draggable state
@@ -99,6 +101,7 @@ const ChatBox = ({chatOnClickHandler}) => {
         e.preventDefault();
         // Add user message
         setMessageHistory(prev => [...prev, { sender: 'user', text: inputValue }]);
+        setIsDisable(true)
         // Fetch bot response
         try {
             const response = await fetchChatResponse(inputValue);
@@ -108,6 +111,7 @@ const ChatBox = ({chatOnClickHandler}) => {
             setMessageHistory(prev => [...prev, { sender: 'bot', text: 'Error fetching response.' }]);
         }
         setInputValue("");
+        setIsDisable(false)
     }
     return (
         <div 
@@ -133,9 +137,9 @@ const ChatBox = ({chatOnClickHandler}) => {
             </div>
             
             {/* Chat Content */}
-            <div className="flex-1 px-6 pb-6">
+            <div className="flex-1 px-6 pb-6 overflow-scroll" style={{scrollbarWidth: 'none'}}>
                 {/* Chat Messages Area - Slim Vertical */}
-                <div className="flex-1 mb-6 flex flex-col text-gray-300 italic overflow-y-auto"
+                <div className="flex-1 mb-6 flex flex-col text-gray-300 italic"
                 style={{scrollbarWidth:'none'}}>
                     {/* Placeholder for actual chat bubbles */}
                     <ChatboxItem messages={messageHistory}/> {/* Pass array of objects */}
@@ -161,6 +165,7 @@ const ChatBox = ({chatOnClickHandler}) => {
                     className="p-2.5 bg-white shadow-md rounded-full text-gray-500 hover:text-orange-500 hover:scale-105 active:scale-95 transition-all"
                     aria-label="Send message"
                     onClick={sendOnClickHandler}
+                    disabled={isDisable}
                 >
                     <Send size={20} className="transform rotate-[-10deg]" />
                 </button>

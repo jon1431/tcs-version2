@@ -192,7 +192,7 @@ const DapurPage = () => {
                     }}
                 >
                     <h1 
-                        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold leading-[0.95] text-white drop-shadow-lg"
+                        className="m-8 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold leading-[0.95] text-white drop-shadow-lg"
                         style={{ 
                             fontFamily: 'Playfair Display, Cormorant Garamond, serif',
                             fontWeight: 700,

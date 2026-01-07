@@ -192,7 +192,7 @@ const OrnamentPage = () => {
                     }}
                 >
                     <h1 
-                        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold leading-[0.95] text-white drop-shadow-lg"
+                        className="m-8 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold leading-[0.95] text-white drop-shadow-lg"
                         style={{ 
                             fontFamily: 'Playfair Display, Cormorant Garamond, serif',
                             fontWeight: 700,
@@ -201,12 +201,12 @@ const OrnamentPage = () => {
                         }}
                     >
                         Iconography &<br />
-                        <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-normal">Ornamentation</span>
+                        <span className="text-[60%] font-normal">Ornamentation</span>
                     </h1>
                 </div>
                 {/*explore directory button*/}
                 {/* Central Action Anchor - Bottom-Center (Vertical Symmetry with Title) */}
-                <div className="absolute bottom-40 left-1/2 transform -translate-x-1/2 z-30 w-[50%] px-4 sm:px-0 z-50">
+                <div className="absolute bottom-35 left-1/2 transform -translate-x-1/2 z-30 w-[50%] px-4 sm:px-0 z-50">
                     <button
                         ref={buttonRef}
                         onClick={handleExploreDirectory}
